@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Start Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Generic Browser Start Page">
+</head>
+<body>
+    <header>
+        <h1>Welcome!</h1>
+    </header>
+
+    <nav>
+        <ul style="list-style-type: none;">
+            <li>💎 <a href="https://html5test.com/">HTML5 Test</a></li>
+            <li>🎭 <a href="https://www.youtube.com/">YouTube</a></li>
+            <li>🎮 <a href="https://www.twitch.tv/">Twitch</a></li>
+            <li>🔍 <a href="https://www.google.com/">Google Search</a></li>
+        </ul>
+    </nav>
+
+    <button onclick="fetch('bro://do/something?like&this');">GET request</button>
+
+    <section>
+        <h3>POST Form</h3>
+        <form method="post" id="postForm" name="postForm" action="bro://form/post`">
+            <div class="row">
+                <label for="exampleSubject">Subject</label>
+                <input type="text" placeholder="Your subject" id="exampleSubject">
+            </div>
+            <div class="row">
+                <label for="exampleMessage">Message</label>
+                <textarea placeholder="Your message" id="exampleMessage"></textarea>
+            </div>
+            <div class="row">
+                <label>
+                    <input type="checkbox" id="exampleConfirmation"><span>Confirmation</span>
+                </label>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+
+        <script type="text/javascript">
+            const formElem = document.getElementById("postForm");
+            formElem.addEventListener("submit", (e) => {                
+                e.preventDefault();
+
+                fetch('bro://form/post', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "exampleSubject": document.getElementById("exampleSubject").value,
+                        "exampleMessage": document.getElementById("exampleMessage").value,
+                        "exampleConfirmation": document.getElementById("exampleConfirmation").checked
+                    })
+                })//.then(res => res.json())
+            });
+        </script>
+    </section>
+
+    <footer>
+        This is footer. Goodbye!
+    </footer>
+</body>
+</html>
