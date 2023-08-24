@@ -2,7 +2,7 @@
 
 `CEFsharp` is a .NET (WPF and Windows Forms) bindings for the `Chromium Embedded Framework`. This project is an example of a minimal custom brewed Chromium based browser written under the both `Windows Forms` and `WPF`.
 
-![image](https://github.com/nikvoronin/GenericBrowser/assets/11328666/1317b687-2917-4182-835b-aedebfa123ea)
+![WinForms GenericBrowser](https://user-images.githubusercontent.com/11328666/263079291-1317b687-2917-4182-835b-aedebfa123ea.png)
 
 See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalExample) project.
 
