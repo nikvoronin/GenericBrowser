@@ -24,7 +24,7 @@ See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalE
 
 - WinForms or WPF
 - Latest Chromium browser core.
-- Possibility to implement a custom protocol. For ex. we could implement handler to load from `gemini://gemini.circumlunar.space/`.
+- Possibility to implement protocol for a custom scheme. For ex. implement handler to load from `gemini://gemini.circumlunar.space/`.
 - Enable/disable popup windows.
 - Enable/disable context menu (right mouse click).
 - Disable GPU acceleration to optimize for integrated graphics adapters.
@@ -34,6 +34,11 @@ See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalE
 - Enable/Disable plugins.
 - Inject and execute javascripts on the fly.
 
-## Examples
+## 🚧 Examples
 
-🚧 WIP
+- stylling toolbar to sync its backgroud with web-site body color.
+- `bro://` custom scheme with GET and POST handlers.
+- screenshots
+- logging
+- disable popups and right-click-menu.
+- inject javascripts then evaluate its results.
