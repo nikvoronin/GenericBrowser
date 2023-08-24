@@ -1,8 +1,10 @@
 # Generic Browser
 
-`CEFsharp` is a .NET (WPF and Windows Forms) bindings for the `Chromium Embedded Framework`. This project is an example of minimal custom brewed browser written under the both `Windows Forms` and `WPF`. See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalExample) project.
+`CEFsharp` is a .NET (WPF and Windows Forms) bindings for the `Chromium Embedded Framework`. This project is an example of a minimal custom brewed Chromium based browser written under the both `Windows Forms` and `WPF`.
 
 ![image](https://github.com/nikvoronin/GenericBrowser/assets/11328666/c21acc8f-386f-48c7-bd3d-9383c96635ac)
+
+See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalExample) project.
 
 ## Features
 
