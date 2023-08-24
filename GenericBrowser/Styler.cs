@@ -11,6 +11,7 @@ namespace GenericBrowser
             , RegexOptions.IgnoreCase | RegexOptions.Singleline
             , TimeSpan.FromMilliseconds( 100 ) );
 
+        /// Rgb_A modification
         public static readonly Regex RgbaValuesFilter = new(
             @"rgba\s*\((\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\)"
             , RegexOptions.IgnoreCase | RegexOptions.Singleline

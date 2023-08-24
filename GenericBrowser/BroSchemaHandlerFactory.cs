@@ -1,9 +1,9 @@
 ﻿using CefSharp;
 using Flurl;
+using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
-using System.Windows.Media;
 
 namespace GenericBrowser
 {
@@ -21,18 +21,21 @@ namespace GenericBrowser
             var method = request.Method.ToUpper();
             switch ( method ) {
             case GET:
-                Application.Current
-                    .Dispatcher.InvokeAsync( async () => {
-                        var mainWindow = Application.Current.MainWindow as MainWindow;
-                        var defaultBrush = mainWindow!.AddressBarGrid.Background;
-
-                        for ( int i = 0; i < 3; i++ ) {
-                            mainWindow!.AddressBarGrid.Background = Brushes.Red;
-                            await Task.Delay( 300 );
-                            mainWindow!.AddressBarGrid.Background = defaultBrush;
-                            await Task.Delay( 300 );
-                        }
+                for (int i = 0; i < 3; i++) {
+                    AppHelper.MainWindow!.Invoke( () => {
+                        AppHelper.MainWindow!.NavigationPanel.BackColor =
+                        Color.Red;
                     } );
+
+                    Thread.Sleep( 300 );
+
+                    AppHelper.MainWindow!.Invoke( () => {
+                        AppHelper.MainWindow!.NavigationPanel.BackColor =
+                        System.Drawing.SystemColors.Control;
+                    } );
+
+                    Thread.Sleep( 300 );
+                }
                 break;
 
             case POST:
@@ -44,13 +47,9 @@ namespace GenericBrowser
                         ?? string.Empty
                         , true );
 
-                Application.Current
-                    .Dispatcher.Invoke( () => {
-                        MessageBox.Show(
-                            Application.Current.MainWindow
-                            , json
-                            , "POST Data" );
-                    } );
+                AppHelper.MainWindow!.Invoke( () => {
+                    MessageBox.Show( json, "POST Data" );
+                } );
                 break;
             }
 
