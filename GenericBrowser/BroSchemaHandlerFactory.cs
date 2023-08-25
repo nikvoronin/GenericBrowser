@@ -1,8 +1,6 @@
 ﻿using CefSharp;
 using Flurl;
-using System.Drawing;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 
 namespace GenericBrowser
@@ -21,21 +19,7 @@ namespace GenericBrowser
             var method = request.Method.ToUpper();
             switch ( method ) {
             case GET:
-                for (int i = 0; i < 3; i++) {
-                    AppHelper.MainWindow!.Invoke( () => {
-                        AppHelper.MainWindow!.NavigationPanel.BackColor =
-                        Color.Red;
-                    } );
-
-                    Thread.Sleep( 300 );
-
-                    AppHelper.MainWindow!.Invoke( () => {
-                        AppHelper.MainWindow!.NavigationPanel.BackColor =
-                        System.Drawing.SystemColors.Control;
-                    } );
-
-                    Thread.Sleep( 300 );
-                }
+                MessageBox.Show( request.Url, GET );
                 break;
 
             case POST:
@@ -47,9 +31,7 @@ namespace GenericBrowser
                         ?? string.Empty
                         , true );
 
-                AppHelper.MainWindow!.Invoke( () => {
-                    MessageBox.Show( json, "POST Data" );
-                } );
+                MessageBox.Show( json, POST );
                 break;
             }
 

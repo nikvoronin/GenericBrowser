@@ -3,16 +3,16 @@ using CefSharp.WinForms;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media;
 
 namespace GenericBrowser
 {
     public partial class MainForm : Form
     {
-        ChromiumWebBrowser _browserControl;
+        ChromiumWebBrowser _browserControl = new ();
 
         ILifeSpanHandler? _defaultLifeSpanHandler = null;
         IContextMenuHandler? _contextMenuHandler = null;
@@ -21,16 +21,12 @@ namespace GenericBrowser
 
         public MainForm()
         {
-            AppHelper.MainWindow = this;
-
             InitializeComponent();
             InitializeBrowserControl();
         }
 
         private void InitializeBrowserControl()
         {
-            _browserControl = new ChromiumWebBrowser();
-
             // Add it to the form and fill it to the form window.
             browserPanel.Controls.Add( _browserControl );
             _browserControl.Dock = DockStyle.Fill;
@@ -126,20 +122,14 @@ namespace GenericBrowser
                 if (r.Failed()) return;
 
                 if (r!.Result is string bg) {
-                    var sharpColorString =
-                        Styler.SharpColorFrom( bg );
+                    var bs =
+                        Styler.ToRgbBytes( bg );
 
-                    if (sharpColorString is not null) {
-                        var br =
-                            new BrushConverter()
-                                .ConvertFrom( sharpColorString )
-                                as System.Windows.Media.Brush;
-                        System.Windows.Media.Color clr = ((SolidColorBrush)br).Color;
+                    if (bs is not null) {
                         Invoke( () => {
                             navigationLayoutPanel.BackColor =
-                                clr.R == 0 && clr.G == 0 && clr.B == 0
-                                ? SystemColors.Control
-                                : System.Drawing.Color.FromArgb( clr.R, clr.G, clr.B );
+                                bs.All( b => b == 0 ) ? SystemColors.Control
+                                : Color.FromArgb( bs[0], bs[1], bs[2] );
                         } );
                     }
                 }
@@ -171,27 +161,27 @@ namespace GenericBrowser
             base.OnFormClosing( e );
         }
 
-        private void homeButton_Click( object sender, EventArgs e )
+        private void HomeButton_Click( object sender, EventArgs e )
         {
             BrowseToStartPage();
         }
 
-        private void updateButton_Click( object sender, EventArgs e )
+        private void UpdateButton_Click( object sender, EventArgs e )
         {
             _browserControl.Reload( true );
         }
 
-        private void forwardButton_Click( object sender, EventArgs e )
+        private void ForwardButton_Click( object sender, EventArgs e )
         {
             _browserControl.Forward();
         }
 
-        private void backwardButton_Click( object sender, EventArgs e )
+        private void BackwardButton_Click( object sender, EventArgs e )
         {
             _browserControl.Back();
         }
 
-        private async void screenshotButton_Click( object sender, EventArgs e )
+        private async void ScreenshotButton_Click( object sender, EventArgs e )
         {
             await TakeScreenshot();
         }
@@ -223,12 +213,12 @@ namespace GenericBrowser
                 File.WriteAllBytes( dialog.FileName, data );
         }
 
-        private void devtoolsButton_Click( object sender, EventArgs e )
+        private void DevtoolsButton_Click( object sender, EventArgs e )
         {
             _browserControl.ShowDevTools();
         }
 
-        private void addressTextBox_KeyUp( object sender, KeyEventArgs e )
+        private void AddressTextBox_KeyUp( object sender, KeyEventArgs e )
         {
             if (e.KeyCode != Keys.Enter) return;
 

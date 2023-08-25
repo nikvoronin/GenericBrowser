@@ -137,51 +137,52 @@
             flowLayoutPanel1.Controls.Add( forwardButton );
             flowLayoutPanel1.Controls.Add( homeButton );
             flowLayoutPanel1.Controls.Add( updateButton );
-            flowLayoutPanel1.Location = new System.Drawing.Point( 5, 5 );
-            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding( 5, 0, 0, 0 );
+            flowLayoutPanel1.Location = new System.Drawing.Point( 0, 5 );
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding( 0 );
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size( 140, 35 );
+            flowLayoutPanel1.Padding = new System.Windows.Forms.Padding( 5, 0, 0, 0 );
+            flowLayoutPanel1.Size = new System.Drawing.Size( 145, 35 );
             flowLayoutPanel1.TabIndex = 0;
             // 
             // backwardButton
             // 
-            backwardButton.Location = new System.Drawing.Point( 3, 3 );
+            backwardButton.Location = new System.Drawing.Point( 8, 3 );
             backwardButton.Name = "backwardButton";
             backwardButton.Size = new System.Drawing.Size( 29, 29 );
             backwardButton.TabIndex = 0;
             backwardButton.Text = "◀";
             backwardButton.UseVisualStyleBackColor = true;
-            backwardButton.Click += backwardButton_Click;
+            backwardButton.Click += BackwardButton_Click;
             // 
             // forwardButton
             // 
-            forwardButton.Location = new System.Drawing.Point( 38, 3 );
+            forwardButton.Location = new System.Drawing.Point( 43, 3 );
             forwardButton.Name = "forwardButton";
             forwardButton.Size = new System.Drawing.Size( 29, 29 );
             forwardButton.TabIndex = 1;
             forwardButton.Text = "▶";
             forwardButton.UseVisualStyleBackColor = true;
-            forwardButton.Click += forwardButton_Click;
+            forwardButton.Click += ForwardButton_Click;
             // 
             // homeButton
             // 
-            homeButton.Location = new System.Drawing.Point( 73, 3 );
+            homeButton.Location = new System.Drawing.Point( 78, 3 );
             homeButton.Name = "homeButton";
             homeButton.Size = new System.Drawing.Size( 29, 29 );
             homeButton.TabIndex = 2;
             homeButton.Text = "🏠";
             homeButton.UseVisualStyleBackColor = true;
-            homeButton.Click += homeButton_Click;
+            homeButton.Click += HomeButton_Click;
             // 
             // updateButton
             // 
-            updateButton.Location = new System.Drawing.Point( 108, 3 );
+            updateButton.Location = new System.Drawing.Point( 113, 3 );
             updateButton.Name = "updateButton";
             updateButton.Size = new System.Drawing.Size( 29, 29 );
             updateButton.TabIndex = 3;
             updateButton.Text = "↻";
             updateButton.UseVisualStyleBackColor = true;
-            updateButton.Click += updateButton_Click;
+            updateButton.Click += UpdateButton_Click;
             // 
             // flowLayoutPanel2
             // 
@@ -192,9 +193,10 @@
             flowLayoutPanel2.Controls.Add( screenshotButton );
             flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             flowLayoutPanel2.Location = new System.Drawing.Point( 907, 5 );
-            flowLayoutPanel2.Margin = new System.Windows.Forms.Padding( 0, 0, 5, 0 );
+            flowLayoutPanel2.Margin = new System.Windows.Forms.Padding( 0 );
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new System.Drawing.Size( 70, 35 );
+            flowLayoutPanel2.Padding = new System.Windows.Forms.Padding( 0, 0, 5, 0 );
+            flowLayoutPanel2.Size = new System.Drawing.Size( 75, 35 );
             flowLayoutPanel2.TabIndex = 1;
             // 
             // devtoolsButton
@@ -205,7 +207,7 @@
             devtoolsButton.TabIndex = 4;
             devtoolsButton.Text = "⚡";
             devtoolsButton.UseVisualStyleBackColor = true;
-            devtoolsButton.Click += devtoolsButton_Click;
+            devtoolsButton.Click += DevtoolsButton_Click;
             // 
             // screenshotButton
             // 
@@ -215,7 +217,7 @@
             screenshotButton.TabIndex = 5;
             screenshotButton.Text = "📸";
             screenshotButton.UseVisualStyleBackColor = true;
-            screenshotButton.Click += screenshotButton_Click;
+            screenshotButton.Click += ScreenshotButton_Click;
             // 
             // addressTextBox
             // 
@@ -226,7 +228,7 @@
             addressTextBox.Size = new System.Drawing.Size( 710, 27 );
             addressTextBox.TabIndex = 2;
             addressTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            addressTextBox.KeyUp += addressTextBox_KeyUp;
+            addressTextBox.KeyUp += AddressTextBox_KeyUp;
             // 
             // MainForm
             // 
