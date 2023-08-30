@@ -2,13 +2,18 @@
 
 `CEFsharp` is a .NET (WPF and Windows Forms) bindings for the `Chromium Embedded Framework`. This project is an example of a minimal Chromium based browser written under the both `Windows Forms` and `WPF`.
 
+- [Features](#features)
+- [Recommended Reading List](#recommended-reading-list)
+- [Alternatives](#alternatives)
+- [Examples🚧](#examples)
+
 ![WinForms GenericBrowser](https://user-images.githubusercontent.com/11328666/263242161-e9f0a14a-5fda-415c-80df-d9a03df8ee72.png)
 
 See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalExample) project.
 
 ## Features
 
-## User
+### User
 
 - Local web-page `index.html` for local experiments
   - Links to test web services.
@@ -47,7 +52,12 @@ See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalE
 - [Master Build Quick Start](https://bitbucket.org/chromiumembedded/cef/wiki/MasterBuildQuickStart). This Wiki page provides a quick-start guide for creating a Debug build of CEF/Chromium using the current master (development) branch.
 - [Automated Build Setup](https://bitbucket.org/chromiumembedded/cef/wiki/AutomatedBuildSetup). CEF provides tools for automatically downloading, building and packaging Chromium and CEF source code. These tools are the recommended way of building CEF locally and can also be integrated with an automated build system.
 
-## 🚧 Examples
+## Alternatives
+
+- [Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
+- [TeamDev DotNetBrowser](https://dotnetbrowser-support.teamdev.com/)
+
+## Examples🚧
 
 ![Let's build from here](https://user-images.githubusercontent.com/11328666/263079291-1317b687-2917-4182-835b-aedebfa123ea.png)
 
