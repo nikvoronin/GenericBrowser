@@ -69,6 +69,8 @@ See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalE
 
 ### Create browser control WinForms
 
+The `browserPanel` could be a Form (ie window as is) or container Panel inside a form or even Control.
+
 ```csharp
 public partial class MainForm : Form
 {
@@ -161,6 +163,8 @@ public class BroSchemaHandlerFactory : ISchemeHandlerFactory
 ```
 
 ### Take a screenshot
+
+⚠ WinForms or headless/windowless versions only.
 
 ```csharp
 var contentSize = await _browserControl.GetContentSizeAsync();
