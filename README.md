@@ -5,7 +5,13 @@
 - [Features](#features)
 - [Recommended Reading List](#recommended-reading-list)
 - [Alternatives](#alternatives)
-- [Examples🚧](#examples)
+- [Examples](#examples)
+  - [Create browser control WinForms](#create-browser-control-winforms)
+  - [Styling control with html-body color](#styling-control-with-html-body-color)
+  - [Custom protocol scheme](#custom-protocol-scheme)
+  - [Take a screenshot](#take-a-screenshot)
+  - [Disable pop-up windows](#disable-pop-up-windows)
+  - [Disable context menu](#disable-context-menu)
 
 ![WinForms GenericBrowser](https://user-images.githubusercontent.com/11328666/263242161-e9f0a14a-5fda-415c-80df-d9a03df8ee72.png)
 
@@ -57,13 +63,170 @@ See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalE
 - [Microsoft Edge WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)
 - [TeamDev DotNetBrowser](https://dotnetbrowser-support.teamdev.com/)
 
-## Examples🚧
+## Examples
 
 ![Let's build from here](https://user-images.githubusercontent.com/11328666/263079291-1317b687-2917-4182-835b-aedebfa123ea.png)
 
-- stylling toolbar to sync its backgroud with web-site body color.
-- `bro://` custom scheme with GET and POST handlers.
-- screenshots
-- logging
-- disable popups and right-click-menu.
-- inject javascripts then evaluate its results.
+### Create browser control WinForms
+
+```csharp
+public partial class MainForm : Form
+{
+    ChromiumWebBrowser _browserControl = new ();
+
+    public MainForm()
+    {
+        InitializeComponent();
+
+        // Add it to the form and fill it to the form window.
+        browserPanel.Controls.Add( _browserControl );
+        _browserControl.Dock = DockStyle.Fill;
+    }
+    ...
+```
+
+### Styling control with html-body color
+
+It also describes how to inject javascript and evaluate its results.
+
+```csharp
+var mainFrame = _browserControl.GetMainFrame();
+if (mainFrame is null) return;
+
+var r =
+    await mainFrame!.EvaluateScriptAsync(
+        "window.getComputedStyle( document.body ).backgroundColor" );
+if (r.Failed()) return;
+
+if (r!.Result is string bg) {
+    var bs =
+        Styler.ToRgbBytes( bg );
+
+    if (bs is not null) {
+        Invoke( () => {
+            navigationLayoutPanel.BackColor =
+                bs.All( b => b == 0 ) ? SystemColors.Control
+                : Color.FromArgb( bs[0], bs[1], bs[2] );
+        } );
+    }
+}
+```
+
+### Custom protocol scheme
+
+#### Register scheme
+
+Let it be a brand new scheme `bro://` (named after a BROwser).
+
+```csharp
+var settings = new CefSettings();
+
+settings.RegisterScheme(
+    new CefCustomScheme() {
+        SchemeName = "bro"
+        , SchemeHandlerFactory = new BroSchemaHandlerFactory()
+        , IsFetchEnabled = true
+        , IsCorsEnabled = true
+    } );
+
+// Apply new settings
+if (!Cef.IsInitialized) {
+    Cef.Initialize(
+        settings
+        , performDependencyCheck: true
+        , browserProcessHandler: null );
+}
+```
+
+#### Handle scheme requests
+
+```csharp
+public class BroSchemaHandlerFactory : ISchemeHandlerFactory
+{
+    public IResourceHandler Create( IBrowser browser, IFrame frame, string schemaName, IRequest request )
+    {
+        var u = Url.Parse( request.Url );
+        var schemaMismatch =
+            schemaName != SchemaName
+            || u.Scheme != schemaName;
+
+        if ( schemaMismatch ) return new ResourceHandler();
+
+        var method = request.Method.ToUpper();
+        switch ( method ) {
+        case "GET": break;
+        case "POST": break;
+        }
+        ...
+```
+
+### Take a screenshot
+
+```csharp
+var contentSize = await _browserControl.GetContentSizeAsync();
+
+var viewPort = new CefSharp.DevTools.Page.Viewport {
+    Width = contentSize.Width,
+    Height = contentSize.Height,
+};
+
+var data =
+    await _browserControl.CaptureScreenshotAsync(
+        viewPort: viewPort
+        , captureBeyondViewport: true );
+
+File.WriteAllBytes( $"image_{DateTime.Now.Ticks}.jpeg", data );
+```
+
+### Disable pop-up windows
+
+```csharp
+_browserControl.LifeSpanHandler = new DisablePopupLifeSpan();
+```
+
+#### Custom ILifeSpanHandler
+
+```csharp
+public class DisablePopupLifeSpan : ILifeSpanHandler
+{
+    public void OnAfterCreated( IWebBrowser chromiumWebBrowser, IBrowser browser ) { }
+    public void OnBeforeClose( IWebBrowser chromiumWebBrowser, IBrowser browser ) { }
+
+    public bool DoClose( IWebBrowser chromiumWebBrowser, IBrowser browser )
+        => false;
+
+    public bool OnBeforePopup( IWebBrowser chromiumWebBrowser, ..., out IWebBrowser newBrowser )
+    {
+        newBrowser = null!;
+        return true; // do not popup
+    }
+}
+```
+
+### Disable context menu
+
+Also known as context menu.
+
+```csharp
+_browserControl.MenuHandler = new DisableContextMenuHandler();
+```
+
+#### Custom IContextMenuHandler
+
+```csharp
+public class DisableContextMenuHandler : IContextMenuHandler
+{
+    public void OnContextMenuDismissed( IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame ) { }
+
+    public void OnBeforeContextMenu( IWebBrowser chromiumWebBrowser, ..., IMenuModel model )
+    {
+        model.Clear();
+    }
+
+    public bool OnContextMenuCommand( IWebBrowser chromiumWebBrowser, ... )
+        => false;
+
+    public bool RunContextMenu( IWebBrowser chromiumWebBrowser, ... )
+        => false;
+}
+```
