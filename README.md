@@ -34,6 +34,19 @@ See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalE
 - Enable/Disable plugins.
 - Inject and execute javascripts on the fly.
 
+## Recommended Reading List
+
+### CEFsharp
+
+- [General Usage CEFsharp](https://github.com/cefsharp/CefSharp/wiki/General-Usage). This guide introduces the general concepts involved when developing an application using CefSharp. It's important to remember that CefSharp is a .Net wrapper around the Chromium Embedded Framework (CEF). CEF is an open source project based on the Google Chromium project. Unlike the Chromium project itself, which focuses mainly on Google Chrome application development, CEF focuses on facilitating embedded browser use cases in third-party applications.
+- [Build CEF with proprietary codecs support](https://magpcss.org/ceforum/viewtopic.php?f=6&t=13515). I would like to build CEF xxxx (current master branch) for Windows (x64, Visual Studio 20xx) with proprietary codec support.
+- [Building CefSharp](https://github.com/cefsharp/CefSharp/wiki/Building-CefSharp).
+
+### Chromium Embedded Framework (CEF)
+
+- [Master Build Quick Start](https://bitbucket.org/chromiumembedded/cef/wiki/MasterBuildQuickStart). This Wiki page provides a quick-start guide for creating a Debug build of CEF/Chromium using the current master (development) branch.
+- [Automated Build Setup](https://bitbucket.org/chromiumembedded/cef/wiki/AutomatedBuildSetup). CEF provides tools for automatically downloading, building and packaging Chromium and CEF source code. These tools are the recommended way of building CEF locally and can also be integrated with an automated build system.
+
 ## 🚧 Examples
 
 ![Let's build from here](https://user-images.githubusercontent.com/11328666/263079291-1317b687-2917-4182-835b-aedebfa123ea.png)
