@@ -220,7 +220,7 @@ _browserControl.MenuHandler = new DisableContextMenuHandler();
 ```csharp
 public class DisableContextMenuHandler : IContextMenuHandler
 {
-    public void OnContextMenuDismissed( IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame ) { }
+    public void OnContextMenuDismissed( IWebBrowser chromiumWebBrowser, ... ) { }
 
     public void OnBeforeContextMenu( IWebBrowser chromiumWebBrowser, ..., IMenuModel model )
     {
