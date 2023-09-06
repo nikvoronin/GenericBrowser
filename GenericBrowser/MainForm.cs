@@ -162,29 +162,19 @@ namespace GenericBrowser
         }
 
         private void HomeButton_Click( object sender, EventArgs e )
-        {
-            BrowseToStartPage();
-        }
+            => BrowseToStartPage();
 
         private void UpdateButton_Click( object sender, EventArgs e )
-        {
-            _browserControl.Reload( true );
-        }
+            => _browserControl.Reload( true );
 
         private void ForwardButton_Click( object sender, EventArgs e )
-        {
-            _browserControl.Forward();
-        }
+            => _browserControl.Forward();
 
         private void BackwardButton_Click( object sender, EventArgs e )
-        {
-            _browserControl.Back();
-        }
+            => _browserControl.Back();
 
         private async void ScreenshotButton_Click( object sender, EventArgs e )
-        {
-            await TakeScreenshot();
-        }
+            => await TakeScreenshot();
 
         private async Task TakeScreenshot()
         {
@@ -203,10 +193,8 @@ namespace GenericBrowser
             var dialog =
                 new SaveFileDialog {
                     DefaultExt = "jpeg"
-                    ,
-                    Filter = "PNG lossless image file (*.png)|*.png|JPEG compressed image file (*.jpg,*.jpeg)|*.jpg;*.jpeg|Any files (*.*)|*.*"
-                    ,
-                    FileName = DateTime.Now.Ticks.ToString()
+                    , Filter = "PNG lossless image file (*.png)|*.png|JPEG compressed image file (*.jpg,*.jpeg)|*.jpg;*.jpeg|Any files (*.*)|*.*"
+                    , FileName = DateTime.Now.Ticks.ToString()
                 };
 
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -214,9 +202,7 @@ namespace GenericBrowser
         }
 
         private void DevtoolsButton_Click( object sender, EventArgs e )
-        {
-            _browserControl.ShowDevTools();
-        }
+            => _browserControl.ShowDevTools();
 
         private void AddressTextBox_KeyUp( object sender, KeyEventArgs e )
         {
