@@ -26,6 +26,7 @@ See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalE
   - POST form to fetch POST requests.
   - Button to fetch GET requests.
 - Address bar with Google search ability.
+- 🖨 Print-to-PDF.
 - 📸 Screenshots with save dialog.
 - ⚡ DevTools for developers.
 - Standart navigation buttons: ◀ back, ▶ forward, 🏠 home, ↻ reload.
