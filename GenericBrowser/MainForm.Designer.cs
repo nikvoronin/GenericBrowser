@@ -43,6 +43,7 @@
             devtoolsButton = new System.Windows.Forms.Button();
             screenshotButton = new System.Windows.Forms.Button();
             addressTextBox = new System.Windows.Forms.TextBox();
+            printButton = new System.Windows.Forms.Button();
             mainTableLayoutPanel.SuspendLayout();
             mainStatusStrip.SuspendLayout();
             navigationLayoutPanel.SuspendLayout();
@@ -114,8 +115,8 @@
             navigationLayoutPanel.BackColor = System.Drawing.SystemColors.Control;
             navigationLayoutPanel.ColumnCount = 3;
             navigationLayoutPanel.ColumnStyles.Add( new System.Windows.Forms.ColumnStyle( System.Windows.Forms.SizeType.Percent, 17F ) );
-            navigationLayoutPanel.ColumnStyles.Add( new System.Windows.Forms.ColumnStyle( System.Windows.Forms.SizeType.Percent, 73F ) );
-            navigationLayoutPanel.ColumnStyles.Add( new System.Windows.Forms.ColumnStyle( System.Windows.Forms.SizeType.Percent, 10F ) );
+            navigationLayoutPanel.ColumnStyles.Add( new System.Windows.Forms.ColumnStyle( System.Windows.Forms.SizeType.Percent, 70F ) );
+            navigationLayoutPanel.ColumnStyles.Add( new System.Windows.Forms.ColumnStyle( System.Windows.Forms.SizeType.Percent, 13F ) );
             navigationLayoutPanel.Controls.Add( flowLayoutPanel1, 0, 0 );
             navigationLayoutPanel.Controls.Add( flowLayoutPanel2, 2, 0 );
             navigationLayoutPanel.Controls.Add( addressTextBox, 1, 0 );
@@ -191,17 +192,18 @@
             flowLayoutPanel2.BackColor = System.Drawing.SystemColors.Control;
             flowLayoutPanel2.Controls.Add( devtoolsButton );
             flowLayoutPanel2.Controls.Add( screenshotButton );
+            flowLayoutPanel2.Controls.Add( printButton );
             flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            flowLayoutPanel2.Location = new System.Drawing.Point( 907, 5 );
+            flowLayoutPanel2.Location = new System.Drawing.Point( 872, 5 );
             flowLayoutPanel2.Margin = new System.Windows.Forms.Padding( 0 );
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Padding = new System.Windows.Forms.Padding( 0, 0, 5, 0 );
-            flowLayoutPanel2.Size = new System.Drawing.Size( 75, 35 );
+            flowLayoutPanel2.Size = new System.Drawing.Size( 110, 35 );
             flowLayoutPanel2.TabIndex = 1;
             // 
             // devtoolsButton
             // 
-            devtoolsButton.Location = new System.Drawing.Point( 38, 3 );
+            devtoolsButton.Location = new System.Drawing.Point( 73, 3 );
             devtoolsButton.Name = "devtoolsButton";
             devtoolsButton.Size = new System.Drawing.Size( 29, 29 );
             devtoolsButton.TabIndex = 4;
@@ -211,7 +213,7 @@
             // 
             // screenshotButton
             // 
-            screenshotButton.Location = new System.Drawing.Point( 3, 3 );
+            screenshotButton.Location = new System.Drawing.Point( 38, 3 );
             screenshotButton.Name = "screenshotButton";
             screenshotButton.Size = new System.Drawing.Size( 29, 29 );
             screenshotButton.TabIndex = 5;
@@ -225,10 +227,20 @@
             addressTextBox.Font = new System.Drawing.Font( "Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point );
             addressTextBox.Location = new System.Drawing.Point( 169, 9 );
             addressTextBox.Name = "addressTextBox";
-            addressTextBox.Size = new System.Drawing.Size( 710, 27 );
+            addressTextBox.Size = new System.Drawing.Size( 681, 27 );
             addressTextBox.TabIndex = 2;
             addressTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             addressTextBox.KeyUp += AddressTextBox_KeyUp;
+            // 
+            // printButton
+            // 
+            printButton.Location = new System.Drawing.Point( 3, 3 );
+            printButton.Name = "printButton";
+            printButton.Size = new System.Drawing.Size( 29, 29 );
+            printButton.TabIndex = 6;
+            printButton.Text = "🖨";
+            printButton.UseVisualStyleBackColor = true;
+            printButton.Click += PrintButton_Click;
             // 
             // MainForm
             // 
@@ -266,5 +278,6 @@
         private System.Windows.Forms.Button screenshotButton;
         private System.Windows.Forms.TextBox addressTextBox;
         private System.Windows.Forms.ToolStripDropDownButton logToolStripDropDown;
+        private System.Windows.Forms.Button printButton;
     }
 }

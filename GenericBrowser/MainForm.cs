@@ -12,7 +12,7 @@ namespace GenericBrowser
 {
     public partial class MainForm : Form
     {
-        ChromiumWebBrowser _browserControl = new ();
+        ChromiumWebBrowser _browserControl = new();
 
         ILifeSpanHandler? _defaultLifeSpanHandler = null;
         IContextMenuHandler? _contextMenuHandler = null;
@@ -176,6 +176,21 @@ namespace GenericBrowser
         private async void ScreenshotButton_Click( object sender, EventArgs e )
             => await TakeScreenshot();
 
+        private async void PrintButton_Click( object sender, EventArgs e )
+        {
+            var dialog =
+                new SaveFileDialog 
+                { DefaultExt = "pdf"
+                , Filter = "PDF file (*.pdf)|*.pdf|Any files (*.*)|*.*"
+                , FileName = DateTime.Now.Ticks.ToString()
+                };
+
+            if (dialog.ShowDialog() == DialogResult.OK) {
+                await _browserControl.GetMainFrame().Browser
+                    .PrintToPdfAsync(dialog.FileName);
+            }
+        }
+
         private async Task TakeScreenshot()
         {
             var contentSize = await _browserControl.GetContentSizeAsync();
@@ -191,10 +206,10 @@ namespace GenericBrowser
                     , captureBeyondViewport: true );
 
             var dialog =
-                new SaveFileDialog {
-                    DefaultExt = "jpeg"
-                    , Filter = "PNG lossless image file (*.png)|*.png|JPEG compressed image file (*.jpg,*.jpeg)|*.jpg;*.jpeg|Any files (*.*)|*.*"
-                    , FileName = DateTime.Now.Ticks.ToString()
+                new SaveFileDialog
+                { DefaultExt = "jpeg"
+                , Filter = "PNG lossless image file (*.png)|*.png|JPEG compressed image file (*.jpg,*.jpeg)|*.jpg;*.jpeg|Any files (*.*)|*.*"
+                , FileName = DateTime.Now.Ticks.ToString()
                 };
 
             if (dialog.ShowDialog() == DialogResult.OK)
