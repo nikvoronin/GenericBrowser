@@ -11,9 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common.NETCore" Version="116.0.130" />
-    <PackageReference Include="CefSharp.WinForms.NETCore" Version="116.0.130" />
-    <PackageReference Include="Flurl" Version="3.0.7" />
+    <PackageReference Include="CefSharp.Common.NETCore" Version="120.1.110" />
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="120.1.110" />
+    <PackageReference Include="Flurl" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,5 +25,17 @@
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="del $(TargetDir)CefSharp.BrowserSubprocess.runtimeconfig.json" />
 	</Target>
+
+	<ItemGroup>
+	  <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="120.1.10" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="120.1.10" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="120.1.10" />
+	</ItemGroup>
 
 </Project>
