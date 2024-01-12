@@ -12,13 +12,6 @@ namespace GenericBrowser
 {
     public partial class MainForm : Form
     {
-        ChromiumWebBrowser _browserControl = new();
-
-        ILifeSpanHandler? _defaultLifeSpanHandler = null;
-        IContextMenuHandler? _contextMenuHandler = null;
-
-        public TableLayoutPanel NavigationPanel => navigationLayoutPanel;
-
         public MainForm()
         {
             InitializeComponent();
@@ -50,11 +43,11 @@ namespace GenericBrowser
             // do not confuse with the log from CEF core component which configured in CefSettings
             //_browserControl.ConsoleMessage += ( sender, args )
             //    => _logger.LogDebug(
-            //        "{0}|{1}({2}): {3}"
-            //        , args.Level
-            //        , args.Source
-            //        , args.Line
-            //        , args.Message );
+            //        "{0}|{1}({2}): {3}",
+            //        args.Level,
+            //        args.Source,
+            //        args.Line,
+            //        args.Message );
 
             _browserControl.FrameLoadStart += ( s, e ) => UrlStatusLabel = e.Url;
             _browserControl.FrameLoadEnd += BrowserControl_FrameLoadEnd;
@@ -176,19 +169,24 @@ namespace GenericBrowser
         private async void ScreenshotButton_Click( object sender, EventArgs e )
             => await TakeScreenshot();
 
-        private async void PrintButton_Click( object sender, EventArgs e )
+        private async void SavePageAsPdfButton_Click( object sender, EventArgs e )
         {
             var dialog =
-                new SaveFileDialog 
-                { DefaultExt = "pdf"
-                , Filter = "PDF file (*.pdf)|*.pdf|Any files (*.*)|*.*"
-                , FileName = DateTime.Now.Ticks.ToString()
+                new SaveFileDialog {
+                    DefaultExt = "pdf",
+                    Filter = "PDF file (*.pdf)|*.pdf|Any files (*.*)|*.*",
+                    FileName = DateTime.Now.Ticks.ToString()
                 };
 
             if (dialog.ShowDialog() == DialogResult.OK) {
                 await _browserControl.GetMainFrame().Browser
-                    .PrintToPdfAsync(dialog.FileName);
+                    .PrintToPdfAsync( dialog.FileName );
             }
+        }
+
+        private void PrintPageButton_Click( object sender, EventArgs e )
+        {
+            _browserControl.GetMainFrame().Browser.Print();
         }
 
         private async Task TakeScreenshot()
@@ -202,14 +200,14 @@ namespace GenericBrowser
 
             var data =
                 await _browserControl.CaptureScreenshotAsync(
-                    viewPort: viewPort
-                    , captureBeyondViewport: true );
+                    viewPort: viewPort, 
+                    captureBeyondViewport: true );
 
             var dialog =
-                new SaveFileDialog
-                { DefaultExt = "jpeg"
-                , Filter = "PNG lossless image file (*.png)|*.png|JPEG compressed image file (*.jpg,*.jpeg)|*.jpg;*.jpeg|Any files (*.*)|*.*"
-                , FileName = DateTime.Now.Ticks.ToString()
+                new SaveFileDialog {
+                    DefaultExt = "jpeg",
+                    Filter = "PNG lossless image file (*.png)|*.png|JPEG compressed image file (*.jpg,*.jpeg)|*.jpg;*.jpeg|Any files (*.*)|*.*",
+                    FileName = DateTime.Now.Ticks.ToString()
                 };
 
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -281,5 +279,9 @@ namespace GenericBrowser
 
             _browserControl.LoadUrl( searchUrl );
         }
+
+        readonly ChromiumWebBrowser _browserControl = new();
+        private ILifeSpanHandler? _defaultLifeSpanHandler;
+        private IContextMenuHandler? _contextMenuHandler;
     }
 }

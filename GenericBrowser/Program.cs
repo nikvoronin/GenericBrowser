@@ -32,7 +32,8 @@ namespace GenericBrowser
             // this would change the default UserAgent
             //settings.UserAgent = UserAgent_Chrome104;
 
-            settings.EnablePrintPreview();
+            // use carefully with Browser.Print() function
+            //settings.EnablePrintPreview();
 
             // would be able to accept custom protocol requests
             // bro://actions/and/requests?yes&we&can
@@ -62,9 +63,9 @@ namespace GenericBrowser
             // Apply new settings
             if (!Cef.IsInitialized) {
                 Cef.Initialize(
-                    settings
-                    , performDependencyCheck: true
-                    , browserProcessHandler: null );
+                    settings,
+                    performDependencyCheck: true,
+                    browserProcessHandler: null );
             }
         }
 
