@@ -26,11 +26,14 @@ See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalE
   - POST form to fetch POST requests.
   - Button to fetch GET requests.
 - Address bar with Google search ability.
-- 🖨 Print-to-PDF.
-- 📸 Screenshots with save dialog.
+- 🖨 Print page.*
+- 📃 Save page as PDF file.*
+- 📸 Take screenshot with "save as PNG file" dialog.*
 - ⚡ DevTools for developers.
 - Standart navigation buttons: ◀ back, ▶ forward, 🏠 home, ↻ reload.
 - Status bar to show address of hover links.
+
+\* Windows Forms only.
 
 ### Developer
 
@@ -45,6 +48,8 @@ See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalE
 - Logging from low-level to up to javascript console messages.
 - Enable/Disable plugins.
 - Inject and execute javascripts on the fly.
+
+⚠ Be careful with print preview function (see [Program.cs](https://github.com/nikvoronin/GenericBrowser/blob/main/GenericBrowser/Program.cs#L36)).
 
 ## Recommended Reading List
 
@@ -102,13 +107,13 @@ var r =
 if (r.Failed()) return;
 
 if (r!.Result is string bg) {
-    var bs =
-        Styler.ToRgbBytes( bg );
+    var bs = Styler.ToRgbBytes( bg );
 
     if (bs is not null) {
         Invoke( () => {
             navigationLayoutPanel.BackColor =
-                bs.All( b => b == 0 ) ? SystemColors.Control
+                bs.All( b => b == 0 )
+                ? SystemColors.Control
                 : Color.FromArgb( bs[0], bs[1], bs[2] );
         } );
     }
@@ -126,18 +131,18 @@ var settings = new CefSettings();
 
 settings.RegisterScheme(
     new CefCustomScheme() {
-        SchemeName = "bro"
-        , SchemeHandlerFactory = new BroSchemaHandlerFactory()
-        , IsFetchEnabled = true
-        , IsCorsEnabled = true
+        SchemeName = "bro",
+        SchemeHandlerFactory = new BroSchemaHandlerFactory(),
+        IsFetchEnabled = true,
+        IsCorsEnabled = true
     } );
 
 // Apply new settings
 if (!Cef.IsInitialized) {
     Cef.Initialize(
-        settings
-        , performDependencyCheck: true
-        , browserProcessHandler: null );
+        settings,
+        performDependencyCheck: true,
+        browserProcessHandler: null );
 }
 ```
 
@@ -177,8 +182,8 @@ var viewPort = new CefSharp.DevTools.Page.Viewport {
 
 var data =
     await _browserControl.CaptureScreenshotAsync(
-        viewPort: viewPort
-        , captureBeyondViewport: true );
+        viewPort: viewPort,
+        captureBeyondViewport: true );
 
 File.WriteAllBytes( $"image_{DateTime.Now.Ticks}.jpeg", data );
 ```
