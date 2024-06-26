@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common.NETCore" Version="120.1.110" />
-    <PackageReference Include="CefSharp.WinForms.NETCore" Version="120.1.110" />
+    <PackageReference Include="CefSharp.Common.NETCore" Version="126.2.70" />
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="126.2.70" />
     <PackageReference Include="Flurl" Version="4.0.0" />
   </ItemGroup>
 
@@ -27,15 +27,15 @@
 	</Target>
 
 	<ItemGroup>
-	  <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="120.1.10" />
+	  <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="126.2.7" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="120.1.10" />
+	  <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="126.2.7" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="120.1.10" />
+	  <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="126.2.7" />
 	</ItemGroup>
 
 </Project>
