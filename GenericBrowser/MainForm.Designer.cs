@@ -27,10 +27,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager( typeof( MainForm ) );
             mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             mainStatusStrip = new System.Windows.Forms.StatusStrip();
-            logToolStripDropDown = new System.Windows.Forms.ToolStripDropDownButton();
             urlStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             browserPanel = new System.Windows.Forms.Panel();
             navigationLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -43,8 +41,8 @@
             devtoolsButton = new System.Windows.Forms.Button();
             screenshotButton = new System.Windows.Forms.Button();
             savePageAsPdfButton = new System.Windows.Forms.Button();
-            addressTextBox = new System.Windows.Forms.TextBox();
             printPageButton = new System.Windows.Forms.Button();
+            addressTextBox = new System.Windows.Forms.TextBox();
             mainTableLayoutPanel.SuspendLayout();
             mainStatusStrip.SuspendLayout();
             navigationLayoutPanel.SuspendLayout();
@@ -73,32 +71,23 @@
             // mainStatusStrip
             // 
             mainStatusStrip.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            mainStatusStrip.AutoSize = false;
             mainTableLayoutPanel.SetColumnSpan( mainStatusStrip, 3 );
             mainStatusStrip.Dock = System.Windows.Forms.DockStyle.None;
             mainStatusStrip.ImageScalingSize = new System.Drawing.Size( 20, 20 );
-            mainStatusStrip.Items.AddRange( new System.Windows.Forms.ToolStripItem[] { logToolStripDropDown, urlStatusLabel } );
+            mainStatusStrip.Items.AddRange( new System.Windows.Forms.ToolStripItem[] { urlStatusLabel } );
             mainStatusStrip.Location = new System.Drawing.Point( 0, 727 );
             mainStatusStrip.Name = "mainStatusStrip";
             mainStatusStrip.Size = new System.Drawing.Size( 982, 26 );
             mainStatusStrip.TabIndex = 0;
             mainStatusStrip.Text = "statusStrip1";
             // 
-            // logToolStripDropDown
-            // 
-            logToolStripDropDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            logToolStripDropDown.Image = (System.Drawing.Image)resources.GetObject( "logToolStripDropDown.Image" );
-            logToolStripDropDown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            logToolStripDropDown.Margin = new System.Windows.Forms.Padding( 0, 2, 15, 0 );
-            logToolStripDropDown.Name = "logToolStripDropDown";
-            logToolStripDropDown.Size = new System.Drawing.Size( 48, 24 );
-            logToolStripDropDown.Text = "Log";
-            logToolStripDropDown.Visible = false;
-            // 
             // urlStatusLabel
             // 
             urlStatusLabel.Name = "urlStatusLabel";
             urlStatusLabel.Size = new System.Drawing.Size( 50, 20 );
             urlStatusLabel.Text = "Ready";
+            urlStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // browserPanel
             // 
@@ -233,6 +222,16 @@
             savePageAsPdfButton.UseVisualStyleBackColor = true;
             savePageAsPdfButton.Click += SavePageAsPdfButton_Click;
             // 
+            // printPageButton
+            // 
+            printPageButton.Location = new System.Drawing.Point( 3, 3 );
+            printPageButton.Name = "printPageButton";
+            printPageButton.Size = new System.Drawing.Size( 29, 29 );
+            printPageButton.TabIndex = 7;
+            printPageButton.Text = "🖨";
+            printPageButton.UseVisualStyleBackColor = true;
+            printPageButton.Click += PrintPageButton_Click;
+            // 
             // addressTextBox
             // 
             addressTextBox.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
@@ -243,16 +242,6 @@
             addressTextBox.TabIndex = 2;
             addressTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             addressTextBox.KeyUp += AddressTextBox_KeyUp;
-            // 
-            // printPageButton
-            // 
-            printPageButton.Location = new System.Drawing.Point( 3, 3 );
-            printPageButton.Name = "printPageButton";
-            printPageButton.Size = new System.Drawing.Size( 29, 29 );
-            printPageButton.TabIndex = 7;
-            printPageButton.Text = "🖨";
-            printPageButton.UseVisualStyleBackColor = true;
-            printPageButton.Click += PrintPageButton_Click;
             // 
             // MainForm
             // 
@@ -289,7 +278,6 @@
         private System.Windows.Forms.Button devtoolsButton;
         private System.Windows.Forms.Button screenshotButton;
         private System.Windows.Forms.TextBox addressTextBox;
-        private System.Windows.Forms.ToolStripDropDownButton logToolStripDropDown;
         private System.Windows.Forms.Button savePageAsPdfButton;
         private System.Windows.Forms.Button printPageButton;
     }

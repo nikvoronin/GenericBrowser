@@ -27,7 +27,7 @@ namespace GenericBrowser
 
         protected override void OnLoad( EventArgs e )
         {
-            Text = $"{Text} — Chromium v{Cef.ChromiumVersion}";
+            SetMainTitle( Text );
             addressTextBox.Focus();
 
             // disable popups windows at all but store a default handler
@@ -60,10 +60,13 @@ namespace GenericBrowser
             };
 
             _browserControl.TitleChanged += ( s, e ) =>
-                Invoke( () => { Text = $"{e.Title} — Chromium v{Cef.ChromiumVersion}"; } );
+                SetMainTitle( e.Title );
 
             BrowseToStartPage();
         }
+
+        private void SetMainTitle( string title ) => Invoke( () =>
+            Text = $"{title} — Chromium v{Cef.ChromiumVersion}" );
 
         private void BrowserControl_LoadingStateChanged( object? sender, LoadingStateChangedEventArgs e )
         {
@@ -73,23 +76,22 @@ namespace GenericBrowser
                 updateButton.Enabled = e.CanReload;
             } );
 
-            if (!e.IsLoading)
-                Invoke( () => { addressTextBox.Text = _browserControl.Address; } );
+            if (!e.IsLoading) Invoke( () =>
+                addressTextBox.Text = _browserControl.Address );
         }
 
         private void BrowseToStartPage()
         {
             var homeUrl =
-                "file:///"
-                + Path.Combine(
-                    AppContext.BaseDirectory
-                    , "index.html" );
+                Path.Combine(
+                    AppContext.BaseDirectory,
+                    "index.html" );
 
-            _browserControl.Load( homeUrl );
+            _browserControl.Load( $"file:///{homeUrl}" );
         }
 
         private string UrlStatusLabel {
-            set => Invoke( () => { urlStatusLabel.Text = value; } );
+            set => Invoke( () => urlStatusLabel.Text = value );
         }
 
         private async void BrowserControl_FrameLoadEnd( object? sender, FrameLoadEndEventArgs e )
@@ -118,13 +120,11 @@ namespace GenericBrowser
                     var bs =
                         Styler.ToRgbBytes( bg );
 
-                    if (bs is not null) {
-                        Invoke( () => {
-                            navigationLayoutPanel.BackColor =
-                                bs.All( b => b == 0 ) ? SystemColors.Control
-                                : Color.FromArgb( bs[0], bs[1], bs[2] );
-                        } );
-                    }
+                    if (bs is not null) Invoke( () => {
+                        navigationLayoutPanel.BackColor =
+                            bs.All( b => b == 0 ) ? SystemColors.Control
+                            : Color.FromArgb( bs[0], bs[1], bs[2] );
+                    } );
                 }
             }
             catch { }
@@ -139,11 +139,8 @@ namespace GenericBrowser
                 var r = await mainFrame.EvaluateScriptAsync( "document.title" );
                 if (r.Failed()) return;
 
-                if (r!.Result is string title) {
-                    Invoke( () => {
-                        Text = $"{title} — Chromium v{Cef.ChromiumVersion}";
-                    } );
-                }
+                if (r!.Result is string title) Invoke( () =>
+                    SetMainTitle( title ) );
             }
             catch { }
         }
@@ -185,9 +182,7 @@ namespace GenericBrowser
         }
 
         private void PrintPageButton_Click( object sender, EventArgs e )
-        {
-            _browserControl.GetMainFrame().Browser.Print();
-        }
+            => _browserControl.GetMainFrame().Browser.Print();
 
         private async Task TakeScreenshot()
         {
@@ -200,14 +195,14 @@ namespace GenericBrowser
 
             var data =
                 await _browserControl.CaptureScreenshotAsync(
-                    viewPort: viewPort, 
+                    viewPort: viewPort,
                     captureBeyondViewport: true );
 
             var dialog =
                 new SaveFileDialog {
                     DefaultExt = "jpeg",
                     Filter = "PNG lossless image file (*.png)|*.png|JPEG compressed image file (*.jpg,*.jpeg)|*.jpg;*.jpeg|Any files (*.*)|*.*",
-                    FileName = DateTime.Now.Ticks.ToString()
+                    FileName = $"screenshot-{DateTime.Now:yyyyMMdd_HHmmss}"
                 };
 
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -227,15 +222,13 @@ namespace GenericBrowser
         private void InternalNavigateTo( string urlString )
         {
             // No action unless the user types in some sort of url
-            if (string.IsNullOrEmpty( urlString )) {
-                return;
-            }
+            if (string.IsNullOrEmpty( urlString )) return;
 
             var success =
                 Uri.TryCreate(
-                    urlString
-                    , UriKind.RelativeOrAbsolute
-                    , out Uri? url );
+                    urlString,
+                    UriKind.RelativeOrAbsolute,
+                    out Uri? url );
 
             // Basic parsing was a success, now we need to perform additional checks
             if (success) {
@@ -253,7 +246,8 @@ namespace GenericBrowser
                 // or if we pass the url off to the search engine
                 var hostNameType = Uri.CheckHostName( urlString );
 
-                if (hostNameType == UriHostNameType.IPv4 || hostNameType == UriHostNameType.IPv6) {
+                if (hostNameType == UriHostNameType.IPv4
+                    || hostNameType == UriHostNameType.IPv6) {
                     _browserControl.LoadUrl( urlString );
 
                     return;
@@ -268,14 +262,13 @@ namespace GenericBrowser
                             return;
                         }
                     }
-                    catch (Exception) {
-                        // Failed to resolve the host
-                    }
+                    catch { /* Failed to resolve the host */ }
                 }
             }
 
             // Failed parsing load urlString is a search engine
-            var searchUrl = "https://www.google.com/search?q=" + Uri.EscapeDataString( urlString );
+            var searchUrl =
+                $"https://www.google.com/search?q={Uri.EscapeDataString( urlString )}";
 
             _browserControl.LoadUrl( searchUrl );
         }
