@@ -13,7 +13,7 @@
   - [Disable pop-up windows](#disable-pop-up-windows)
   - [Disable context menu](#disable-context-menu)
 
-![WinForms GenericBrowser](https://user-images.githubusercontent.com/11328666/263242161-e9f0a14a-5fda-415c-80df-d9a03df8ee72.png)
+![generic-browser-cefsharp](https://github.com/user-attachments/assets/9bcbd2eb-b063-47f0-a338-149d55cb4615)
 
 See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalExample) project.
 
@@ -71,11 +71,11 @@ See also [CefSharp.MinimalExample](https://github.com/cefsharp/CefSharp.MinimalE
 
 ## Examples
 
-![Let's build from here](https://user-images.githubusercontent.com/11328666/263079291-1317b687-2917-4182-835b-aedebfa123ea.png)
+![Let's build from here](https://github.com/user-attachments/assets/67d233a8-c8f5-4a4d-941d-f41d13acf11b)
 
 ### Create browser control WinForms
 
-The `browserPanel` could be a Form (ie window as is) or container Panel inside a form or even Control.
+The `browserPanel` could be a Form (ie window as is) or container Panel inside a form or even a Control.
 
 ```csharp
 public partial class MainForm : Form
