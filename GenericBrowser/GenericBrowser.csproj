@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
 	  <UseWPF>true</UseWPF>
@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common.NETCore" Version="126.2.70" />
-    <PackageReference Include="CefSharp.WinForms.NETCore" Version="126.2.70" />
+    <PackageReference Include="CefSharp.Common.NETCore" Version="126.2.180" />
+    <PackageReference Include="CefSharp.WinForms.NETCore" Version="126.2.180" />
     <PackageReference Include="Flurl" Version="4.0.0" />
   </ItemGroup>
 
@@ -27,15 +27,15 @@
 	</Target>
 
 	<ItemGroup>
-	  <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="126.2.7" />
+	  <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="126.2.18" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="126.2.7" />
+	  <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="126.2.18" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="126.2.7" />
+	  <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="126.2.18" />
 	</ItemGroup>
 
 </Project>

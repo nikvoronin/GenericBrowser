@@ -1,10 +1,11 @@
 ﻿using CefSharp;
 
-namespace GenericBrowser
+namespace GenericBrowser;
+
+public class EmptyResourceHandler : ResourceHandler
 {
-    public class EmptyResourceHandler : ResourceHandler
-    {
-        public override CefReturnValue ProcessRequestAsync( IRequest request, ICallback callback )
-            => CefReturnValue.Continue;
-    }
+    public override CefReturnValue ProcessRequestAsync(
+        IRequest request,
+        ICallback callback )
+        => CefReturnValue.Continue;
 }

@@ -1,10 +1,9 @@
 ﻿using CefSharp;
 
-namespace GenericBrowser
+namespace GenericBrowser;
+
+public static class JavaScriptExtensions
 {
-    public static class JavaScriptExtensions
-    {
-        public static bool Failed( this JavascriptResponse r )
-            => r is null || !r.Success;
-    }
+    public static bool Failed( this JavascriptResponse r )
+        => r?.Success != true;
 }
