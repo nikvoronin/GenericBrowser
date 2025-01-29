@@ -61,7 +61,7 @@ internal static class Program
         //DisableGpuAcceleration( cef_args, settings );
 
         // Apply new settings
-        if (!Cef.IsInitialized) {
+        if (Cef.IsInitialized is not true) {
             Cef.Initialize(
                 settings,
                 performDependencyCheck: true,
