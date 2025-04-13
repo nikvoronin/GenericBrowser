@@ -15,16 +15,16 @@ public partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
-
-        _browserControl = new();
-        InitializeBrowserControl();
+        InitializeBrowserControl( _browserControl );
     }
 
-    private void InitializeBrowserControl()
+    private void InitializeBrowserControl(ChromiumWebBrowser browser)
     {
-        // Add it to the form and fill it to the form window.
-        browserPanel.Controls.Add( _browserControl );
-        _browserControl.Dock = DockStyle.Fill;
+        // Add browser to the form
+        // then change browser control dock type to the fill mode
+        // to fill whole space of the form.
+        browserPanel.Controls.Add( browser );
+        browser.Dock = DockStyle.Fill;
     }
 
     protected override void OnLoad( EventArgs e )
@@ -32,17 +32,17 @@ public partial class MainForm : Form
         SetMainTitle( Text );
         addressTextBox.Focus();
 
-        // disable popups windows at all but store a default handler
+        // Disable popups windows at all but store a default handler
         // so we can always revert it to the default behavior
         _defaultLifeSpanHandler = _browserControl.LifeSpanHandler;
         _browserControl.LifeSpanHandler = new DisablePopupLifeSpan();
 
-        // disable context menu by right mouse button
+        // Disable context menu by right mouse button
         _contextMenuHandler = _browserControl.MenuHandler;
         //Browser.MenuHandler = new DisableContextMenuHandler();
 
-        // redirect messages of the browser control to an application defined logger
-        // do not confuse with the log from CEF core component which configured in CefSettings
+        // Redirect messages of the browser control to an application defined logger.
+        // Do not confuse with the log from CEF core component which configured in CefSettings
         //_browserControl.ConsoleMessage += ( sender, args )
         //    => _logger.LogDebug(
         //        "{0}|{1}({2}): {3}",
@@ -277,5 +277,5 @@ public partial class MainForm : Form
     private ILifeSpanHandler? _defaultLifeSpanHandler;
     private IContextMenuHandler? _contextMenuHandler;
 
-    private readonly ChromiumWebBrowser _browserControl;
+    private readonly ChromiumWebBrowser _browserControl = new();
 }

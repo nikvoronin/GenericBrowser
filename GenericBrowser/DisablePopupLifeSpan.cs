@@ -4,8 +4,7 @@ namespace GenericBrowser;
 
 public class DisablePopupLifeSpan : ILifeSpanHandler
 {
-    public bool DoClose( IWebBrowser chromiumWebBrowser, IBrowser browser )
-        => false;
+    public bool DoClose( IWebBrowser chromiumWebBrowser, IBrowser browser ) => false;
 
     public void OnAfterCreated( IWebBrowser chromiumWebBrowser, IBrowser browser )
     { }
@@ -28,6 +27,7 @@ public class DisablePopupLifeSpan : ILifeSpanHandler
         out IWebBrowser newBrowser )
     {
         newBrowser = null!;
+
         return true; // do not popup
     }
 }

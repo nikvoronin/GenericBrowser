@@ -8,7 +8,10 @@ namespace GenericBrowser;
 public class BroSchemaHandlerFactory : ISchemeHandlerFactory
 {
     public IResourceHandler Create(
-        IBrowser browser, IFrame frame, string schemaName, IRequest request )
+        IBrowser browser,
+        IFrame frame, 
+        string schemaName, 
+        IRequest request )
     {
         var u = Url.Parse( request.Url );
         var schemaMismatch =
