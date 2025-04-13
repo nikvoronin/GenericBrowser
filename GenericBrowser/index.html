@@ -24,7 +24,9 @@
             <li>🎮 <a href="https://www.twitch.tv/">Twitch</a></li>
             <li>🔍 <a href="https://www.google.com/">Google Search</a></li>
             <li>&nbsp;</li>
-            <li>🐱 <a href="https://github.com/nikvoronin/GenericBrowser">GenericBrowser on GitHub</a></li>
+            <li><strong>GitHub</strong></li>
+            <li>🗡️ <a href="https://cefsharp.github.io/">CEFsharp</a></li>
+            <li>🐱 <a href="https://github.com/nikvoronin/GenericBrowser">GenericBrowser</a></li>
         </ul>
     </nav>
 
@@ -61,17 +63,17 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        "exampleSubject": document.getElementById("exampleSubject").value,
-                        "exampleMessage": document.getElementById("exampleMessage").value,
-                        "exampleConfirmation": document.getElementById("exampleConfirmation").checked
-                    })
+                        "subjectText": document.getElementById("exampleSubject").value,
+                        "messageText": document.getElementById("exampleMessage").value,
+                        "confirmationFlag": document.getElementById("exampleConfirmation").checked
+                    }, null, "    ")
                 })//.then(res => res.json())
             });
         </script>
     </section>
 
-    <footer>
-        This is footer. Goodbye!
+    <footer style="background-color:gray; color:white; margin-top:1em; padding:0.5em">
+        This is footer. See ya!
     </footer>
 </body>
 </html>
